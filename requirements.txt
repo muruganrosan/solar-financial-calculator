@@ -1,3 +1,4 @@
-echo streamlit > requirements.txt
-echo pandas >> requirements.txt
-echo numpy_financial >> requirements.txt
+streamlit==1.31.1
+pandas==2.1.1
+numpy_financial==1.0.0
+
