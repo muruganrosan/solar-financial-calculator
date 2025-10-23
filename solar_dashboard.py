@@ -4,6 +4,8 @@ import numpy_financial as npf
 import pandas as pd
 import io
 
+
+# https://github.com/muruganrosan/solar-financial-calculator
 # --- Page config ---
 st.set_page_config(page_title="Solar Plant Financial Calculator", layout="centered")
 
@@ -17,7 +19,7 @@ plant_capacity_manual_mw = st.sidebar.number_input("Plant Capacity (MW)", value=
 
 panel_type = st.sidebar.selectbox(
     "Solar Panel Type",
-    ["Monocrystalline", "Polycrystalline", "Thin Film"],
+    ["Bifacial","Monocrystalline", "Polycrystalline", ],
     index=0
 )
 
@@ -25,12 +27,13 @@ solar_irradiation = st.sidebar.number_input("Solar Irradiation (kWh/m²/year)", 
 
 # Panel efficiencies
 efficiency_map = {
-    "Monocrystalline": 0.20,
-    "Polycrystalline": 0.17,
-    "Thin Film": 0.12,
+    "Bifacial" : 0.23,
+    "Monocrystalline": 0.21,
+    "Polycrystalline": 0.18,
+
 }
 
-performance_ratio = 0.75
+performance_ratio = 0.85
 panel_efficiency = efficiency_map[panel_type]
 
 estimated_cuf = (solar_irradiation * performance_ratio) / 8760
@@ -94,10 +97,10 @@ project_life = st.sidebar.slider("Project Life (years)", 10, 35, 25)
 st.sidebar.header("Financial Inputs")
 
 capital_cost_map = {
-    "Monocrystalline": 60000000,
-    "Polycrystalline": 50000000,
-    "Thin Film": 45000000,
-}
+    "Bifacial":        55000000,
+    "Monocrystalline": 51000000,
+    "Polycrystalline": 47000000,
+    }
 capital_cost_per_mw_auto = capital_cost_map[panel_type]
 
 use_manual_capital_cost = st.sidebar.checkbox("Override Capital Cost per MW manually", value=False)
